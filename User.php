@@ -11,7 +11,7 @@
         private $login;
         private $password;
         private $email;
-        private $error = []; //Tableau d'erreurs
+        private $errors = []; //Tableau d'erreurs
 
         public function __construct() {
             $options = [
@@ -38,6 +38,7 @@
 
         public function register(string $login, string $email, string $password) {
             if($this->is_exist($login)) {
+                $this->errors[] = "login déja utiliser !";
                 return false;
             }
 
@@ -45,6 +46,29 @@
             $req = $this->bdd->prepare($sql);
             $req->execute([$login, $email, $password]);
             return true;
+        }
+
+        public function connect(string $login, string $password) {
+            //
+            if(!$this->is_exist($login)) {
+                $this->errors[] = "user not found";
+                return false;
+            }
+
+            $sql = "SELECT * FROM ".$this->get_tbname()." WHERE login = ? && password = ?";
+            $req = $this->bdd->prepare($sql);
+            $req->execute([$login, $password]);
+            $res = $req->fetchObject();
+
+            if($req->rowCount()) {
+                $this->logged_in = true;
+                //Créez un ID de session à utiliser dans le constructeur pour vérifier s'il est déjà 
+                //connecter pour une utilisation sur d'autres pages
+                $_SESSION["user_id"] = $res->id;
+                return true;
+            } 
+            $this->errors[] = "error identifiant !";
+            return false;
         }
 
         // _________________________________________ Getters
@@ -74,19 +98,25 @@
             $req->execute([$id]);
 
             if($req->rowCount() == 0) {
+                $this->errors[] = "login not found";
                 return false;
             }
             return $req->fetchObject();
         }
 
-        public function is_logged() {
-            return $this->logged_in;
+        public function get_errors() {
+            return $this->errors;
         }
+
 
         // _________________________________________
         
         // _________________________________________ Setters
 
+
+        public function is_logged() {
+            return $this->logged_in;
+        }
 
         public function is_exist($login) {
             $sql = "SELECT * FROM ".$this->get_tbname()." WHERE login = ?";
@@ -101,4 +131,5 @@
     }
 
     $user = new User;
-    var_dump($user->register(login: "bvb1", password: "bvb", email: "bvb"));
+    var_dump($user->connect(login: "bvb", password: "bvb"));
+    var_dump($user->get_errors());
