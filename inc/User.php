@@ -147,6 +147,22 @@
             header("location: index.php");
             exit();
         }
+
+        //pour la redirection (s'il est connecter ou s'il n'est pas connecter)
+        public function redirect_if_logged() {
+            if(isset($_SESSION["user_id"])) {
+                header("location: ../index.php");
+                exit();
+            }
+        }
+
+        //on l'utilise sur les pages accesibles pour les utilisateurs connecter comme (profile)
+        public function redirect_if_not_logged() {
+            if(!isset($_SESSION["user_id"])) {
+                header("location: ../index.php");
+                exit();
+            }
+        }
     }
 
     $user = new User;

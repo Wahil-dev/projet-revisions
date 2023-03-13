@@ -1,6 +1,8 @@
 <?php
-    require_once("User.php");
-    var_dump($user->get_user_info());
+    require_once("inc/User.php");
+    echo "<pre>";
+        var_dump($user->get_user_info());
+    echo "</pre>";
 
 ?>
 
