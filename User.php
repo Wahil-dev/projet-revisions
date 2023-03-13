@@ -3,14 +3,10 @@
         session_start();
     }
     class User {
-        private $id = NULL; //Connexion utiliser
+        private $bdd; //Connexion utiliser
         private $user_info = NULL; //Tableaux contient les information de utlisateur
         private $logged_in = false; //Utilisateur connecté
         private $tbname = "utilisateurs"; //nom de tableau(database) utiliser dans ce class
-        private $bdd;
-        private $login;
-        private $password;
-        private $email;
         private $errors = []; //Tableau d'erreurs
 
         public function __construct() {
@@ -33,6 +29,16 @@
             } catch(PDOException $e) {
                 echo 'Connection failed: ' . $e->getMessage();
                 die();
+            }
+
+            //si l'id trouvé c'est a dire qui'il est déja connecter
+            if(isset($_SESSION["user_id"])) {
+                //Obtenir les identifiants de l'utilisateur d'apres son id
+                $this->user_info = $this->get_by_id($_SESSION["user_id"]);
+
+                if($this->user_info != NULL) {
+                    $this->logged_in = true;
+                }
             }
         }
 
@@ -77,19 +83,27 @@
         }
         
         public function get_id() {
-            return $this->id;
+            return $this->user_info->id;
         }
 
         public function get_login() {
-            return $this->login;
+            return $this->user_info->login;
         }
 
         public function get_password() {
-            return $this->password;
+            return $this->user_info->password;
         }
 
         public function get_email() {
-            return $this->email;
+            return $this->user_info->email;
+        }
+
+        public function get_register_date() {
+            return $this->user_info->register_date;
+        }
+
+        public function get_user_info() {
+            return $this->user_info;
         }
 
         public function get_by_id($id) {
@@ -99,7 +113,7 @@
 
             if($req->rowCount() == 0) {
                 $this->errors[] = "login not found";
-                return false;
+                return NULL;
             }
             return $req->fetchObject();
         }
@@ -107,7 +121,6 @@
         public function get_errors() {
             return $this->errors;
         }
-
 
         // _________________________________________
         
@@ -128,8 +141,13 @@
             }
             return true;
         }
+
+        public function disconnect() {
+            unset($_SESSION["user_id"]);
+            header("location: index.php");
+            exit();
+        }
     }
 
     $user = new User;
-    var_dump($user->connect(login: "bvb", password: "bvb"));
-    var_dump($user->get_errors());
+    
