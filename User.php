@@ -11,6 +11,7 @@
         private $login;
         private $password;
         private $email;
+        private $error = []; //Tableau d'erreurs
 
         public function __construct() {
             $options = [
@@ -35,6 +36,16 @@
             }
         }
 
+        public function register(string $login, string $email, string $password) {
+            if($this->is_exist($login)) {
+                return false;
+            }
+
+            $sql = "INSERT INTO ".$this->get_tbname()."(login, password, email) VALUES(?, ?, ?)";
+            $req = $this->bdd->prepare($sql);
+            $req->execute([$login, $email, $password]);
+            return true;
+        }
 
         // _________________________________________ Getters
         public function get_tbname() {
@@ -76,6 +87,18 @@
         
         // _________________________________________ Setters
 
+
+        public function is_exist($login) {
+            $sql = "SELECT * FROM ".$this->get_tbname()." WHERE login = ?";
+            $req = $this->bdd->prepare($sql);
+            $req->execute([$login]);
+
+            if($req->rowCount() == 0) {
+                return false;
+            }
+            return true;
+        }
     }
 
     $user = new User;
+    var_dump($user->register(login: "bvb1", password: "bvb", email: "bvb"));
