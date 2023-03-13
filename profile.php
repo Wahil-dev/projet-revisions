@@ -3,7 +3,6 @@
     echo "<pre>";
         var_dump($user->get_user_info());
     echo "</pre>";
-
 ?>
 
-<a href="deconnexion.php">déconnexion</a>
+<a href="inc/deconnexion.php">déconnexion</a>

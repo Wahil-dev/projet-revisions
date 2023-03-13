@@ -144,7 +144,7 @@
 
         public function disconnect() {
             unset($_SESSION["user_id"]);
-            header("location: index.php");
+            header("location: ../index.php");
             exit();
         }
 
