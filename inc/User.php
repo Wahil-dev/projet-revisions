@@ -2,7 +2,8 @@
     if(!session_id()) {
         session_start();
     }
-    class User {
+    require_once("Bdd.php");
+    class User extends Bdd {
         private $bdd; //Connexion utiliser
         private $user_info = NULL; //Tableaux contient les information de utlisateur
         private $logged_in = false; //Utilisateur connecté
@@ -10,26 +11,7 @@
         private $errors = []; //Tableau d'erreurs
 
         public function __construct() {
-            $options = [
-                // turn off emulation mode for "real" prepared statements
-                PDO::ATTR_EMULATE_PREPARES   => false, 
-                //turn on errors in the form of exceptions
-                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, 
-                //make the default fetch be an anonymous object with column names as properties
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ, 
-            ];
-            $server_name = "localhost";
-            $username = "root";
-            $password = "";
-            $dbname = "révisions";
-            try {
-                $this->bdd = new PDO("mysql:host=$server_name; dbname=$dbname", $username, 
-                $password, $options);
-                
-            } catch(PDOException $e) {
-                echo 'Connection failed: ' . $e->getMessage();
-                die();
-            }
+            $this->bdd = Parent::__construct();
 
             //si l'id trouvé c'est a dire qui'il est déja connecter
             if(isset($_SESSION["user_id"])) {
