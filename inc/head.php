@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <header class="">
+    <header class="flex-r">
         <a href="index.php"><?= $user->is_logged() ? $user->get_login() : "visiteur"?></a>
         <nav>
             <?php if($user->is_logged()) : ?>
