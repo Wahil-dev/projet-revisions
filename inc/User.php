@@ -43,11 +43,6 @@
         }
 
         public function register(string $login, string $email, string $password) {
-            if($this->is_exist($login)) {
-                $this->errors[] = "login déja utiliser !";
-                return false;
-            }
-
             $sql = "INSERT INTO ".$this->get_tbname()."(login, password, email) VALUES(?, ?, ?)";
             $req = $this->bdd->prepare($sql);
             $req->execute([$login, $email, $password]);
@@ -55,26 +50,15 @@
         }
 
         public function connect(string $login, string $password) {
-            //
-            if(!$this->is_exist($login)) {
-                $this->errors[] = "user not found";
-                return false;
-            }
-
             $sql = "SELECT * FROM ".$this->get_tbname()." WHERE login = ? && password = ?";
             $req = $this->bdd->prepare($sql);
             $req->execute([$login, $password]);
             $res = $req->fetchObject();
 
-            if($req->rowCount()) {
-                $this->logged_in = true;
-                //Créez un ID de session à utiliser dans le constructeur pour vérifier s'il est déjà 
-                //connecter pour une utilisation sur d'autres pages
-                $_SESSION["user_id"] = $res->id;
-                return true;
-            } 
-            $this->errors[] = "error identifiant !";
-            return false;
+            $this->logged_in = true;
+            //Créez un ID de session à utiliser dans le constructeur pour vérifier s'il est déjà connecter pour une utilisation sur d'autres pages
+            $_SESSION["user_id"] = $res->id;
+            return true;
         }
 
         // _________________________________________ Getters
@@ -112,15 +96,12 @@
             $req->execute([$id]);
 
             if($req->rowCount() == 0) {
-                $this->errors[] = "login not found";
+                $this->errors[] = "login not found / compte supprimer";
                 return NULL;
             }
             return $req->fetchObject();
         }
 
-        public function get_errors() {
-            return $this->errors;
-        }
 
         // _________________________________________
         
@@ -131,10 +112,10 @@
             return $this->logged_in;
         }
 
-        public function is_exist($login) {
-            $sql = "SELECT * FROM ".$this->get_tbname()." WHERE login = ?";
+        public function is_exist($login, $password) {
+            $sql = "SELECT * FROM ".$this->get_tbname()." WHERE login = ? && password = ?";
             $req = $this->bdd->prepare($sql);
-            $req->execute([$login]);
+            $req->execute([$login, $password]);
 
             if($req->rowCount() == 0) {
                 return false;
