@@ -45,7 +45,7 @@
         public function register(string $login, string $email, string $password) {
             $sql = "INSERT INTO ".$this->get_tbname()."(login, password, email) VALUES(?, ?, ?)";
             $req = $this->bdd->prepare($sql);
-            $req->execute([$login, $email, $password]);
+            $req->execute([$login, $password, $email]);
             return true;
         }
 
@@ -143,6 +143,14 @@
                 header("location: index.php");
                 exit();
             }
+        }
+
+        public function login_email_exist($login, $password) {
+            $sql = "SELECT * FROM ".$this->get_tbname(). " WHERE login = ? || email = ?";
+            $req = $this->bdd->prepare($sql);
+            $req->execute([$login, $password]);
+
+            return !empty($req->fetchObject());
         }
     }
 

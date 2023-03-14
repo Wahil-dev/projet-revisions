@@ -8,7 +8,7 @@
             return $inp;
         }
         
-        public static function is_valid($password) {
+        public static function is_valid_password($password) {
             $uppercase = preg_match("@[A-Z]@", $password);
             $lowercase = preg_match("@[a-z]@", $password);
             $number = preg_match("@[0-9]@", $password);
@@ -18,6 +18,11 @@
                 return false;
             }
             return true;
+        }
+        
+        
+        public static function is_valid_email($email) {
+            return filter_var($email, FILTER_VALIDATE_EMAIL);
         }
         
         public static function delete_error_session() {

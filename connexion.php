@@ -13,8 +13,8 @@
 
             <input type="submit" value="connexion" class="btn-custom">
             <span class="err-msg"><?php echo isset($_SESSION["identifierErr"]) ? $_SESSION["identifierErr"] : ""?></span>
-            
         </form>
+        <p>vous-etez déja inscrit <a href="inscription.php">inscription</a></p>
     </div>
 </body>
 </html>

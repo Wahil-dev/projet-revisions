@@ -21,7 +21,7 @@
 
         // ________________ Password validation
         if(isset($_POST["password"]) && !empty($_POST["password"])) {
-            if(Authentication::is_valid($_POST["password"])) {
+            if(Authentication::is_valid_password($_POST["password"])) {
                 $password = Authentication::process_input($_POST["password"]);
             } else {
                 $passwordErr = "
