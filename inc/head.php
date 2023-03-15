@@ -20,6 +20,7 @@
                     <li><a href="articles.php">articles</a></li>
                     <li><a href="profile.php">profile</a></li>
                     <li><a href="new_article.php">new_article</a></li>
+                    <li><a href="new_category.php">new_category</a></li>
                     <li><a href="inc/deconnexion.php">déconnexion</a></li>
                 </ul>
             <?php else :?>

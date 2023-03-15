@@ -2,7 +2,6 @@
     require_once("User.php");
     require_once("Authentication.php");
 
-
     $login = $password = $cPassword = $email = "";
     $loginErr = $passwordErr = $cPasswordErr = $emailErr = "";
     

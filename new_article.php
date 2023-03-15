@@ -1,6 +1,7 @@
 <?php
     require_once("inc/User.php");
     require_once("inc/Article.php");
+    require_once("inc/Categories.php");
     require_once("inc/Authentication.php");
     
 
@@ -12,13 +13,8 @@
         <input type="text" name="title" id="title" class="inp">
         <span class="err-msg"><?php echo isset($_SESSION["titleErr"]) ? $_SESSION["titleErr"] : ""?></span>
 
-        
-        <select name="categories" id="categories">
-            <option value="" default>chose category</option>
-            <option value="informatique">informatique</option>
-            <option value="formation">formation</option>
-            <option value="PHP">PHP</option>
-        </select>
+        <?php Categories::display_categories()?>
+
         <span class="err-msg"><?php echo isset($_SESSION["categoryErr"]) ? $_SESSION["categoryErr"] : ""?></span>
 
         <label for="content">Content</label>
