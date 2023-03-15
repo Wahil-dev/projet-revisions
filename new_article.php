@@ -4,11 +4,11 @@
     require_once("inc/Categories.php");
     require_once("inc/Authentication.php");
     
-
+    $user->redirect_if_not_logged();
     require_once("inc/head.php");
 ?>
 
-    <form class="form" action="inc/b_new_form.php" method="post">
+    <form class="form" action="inc/b_new_article.php" method="post">
         <label for="title">Title</label>
         <input type="text" name="title" id="title" class="inp">
         <span class="err-msg"><?php echo isset($_SESSION["titleErr"]) ? $_SESSION["titleErr"] : ""?></span>

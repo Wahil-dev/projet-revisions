@@ -5,16 +5,14 @@
         private static $tb_name = "categories";
         private $bdd = NULL;
         private $name;
-        private $category_id;
 
-        public function __construct($name, $category_id) {
+        public function __construct($name) {
             $this->bdd = Parent::__construct();
             $this->name = $name;
-            $this->category_id = $category_id;
-            $sql = "INSERT INTO ".$this->get_tbname()."(name, category_id, user_id) VALUES(?, ?, ?)";
+            $sql = "INSERT INTO ".$this->get_tbname()."(name) VALUES(?)";
 
             $req = $this->bdd->prepare($sql);
-            $req->execute([$this->name, $this->category_id, $_SESSION["user_id"]]);
+            $req->execute([$this->name]);
             return true;
         }
 
@@ -25,6 +23,18 @@
 
         //_______________________________________
         
+
+        public static function is_exist($name) {
+            $bdd = Parent::get_conn();
+            $sql = "SELECT * FROM ".self::$tb_name." WHERE name = ?";
+            $req = $bdd->prepare($sql);
+            $req->execute([$name]);
+
+            if($req->rowCount() == 0) {
+                return false;
+            }
+            return true;
+        }
 
         //_______________________________________ Static Method
         public static function get_all_categories() {
@@ -43,7 +53,7 @@
                 <option value="" default>chose category</option>
                 <?php if($categories) :?>
                     <?php for($i=0; isset($categories[$i]); $i++) :?>
-                        <option value="<?= $categories[$i]->name?>"><?= $categories[$i]->name?></option>
+                        <option value="<?= $categories[$i]->id?>"><?= $categories[$i]->name?></option>
                     <?php endfor ;?>
                 <?php endif ;?>
             </select>

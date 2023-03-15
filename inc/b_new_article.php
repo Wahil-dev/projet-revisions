@@ -4,7 +4,7 @@
     require_once("Article.php");
 
 
-    $title = $category = $content = "";
+    $title = $category_id = $content = "";
     $titleErr = $categoryErr = $contentErr = "";
     
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -18,7 +18,7 @@
 
         // ________________ Category validation
         if(isset($_POST["categories"]) && !empty($_POST["categories"])) {
-            $category = Authentication::process_input($_POST["categories"]);
+            $category_id = Authentication::process_input($_POST["categories"]);
         } else {
             $categoryErr = "category requise !";
         }
@@ -32,8 +32,8 @@
         }
         // ___________________________________
 
-        if(!empty($title) && !empty($category) && !empty($content)) {
-            $new_article = new Article($title, $category, $content, "image path");
+        if(!empty($title) && !empty($category_id) && !empty($content)) {
+            $new_article = new Article($title, $content, "image path", $category_id);
             if($new_article) {
                 header("location: ../articles.php");
                 exit();

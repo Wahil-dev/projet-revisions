@@ -5,20 +5,20 @@
         private static $tb_name = "article";
         private $bdd = NULL;
         private $title;
-        private $category;
+        private $category_id;
         private $content;
         private $image;
 
-        public function __construct($title, $category, $content, $image) {
+        public function __construct($title, $content, $image, $category_id) {
             $this->bdd = Parent::__construct();
             $this->title = $title;
             $this->content = $content;
             $this->image = $image;
-            $this->category = $category;
+            $this->category_id = $category_id;
 
-            $sql = "INSERT INTO ".$this->get_tbname()."(title, category, content, imagePath, user_id) VALUES(?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO ".$this->get_tbname()."(title, content, imagePath, user_id, category_id) VALUES(?, ?, ?, ?, ?)";
             $req = $this->bdd->prepare($sql);
-            $req->execute([$this->title, $this->category, $this->content, $this->image, $_SESSION["user_id"]]);
+            $req->execute([$this->title, $this->content, $this->image, $_SESSION["user_id"], $this->category_id]);
             
             return true;
         }
@@ -36,14 +36,15 @@
             $bdd = Parent::get_conn();
 
             $sql = "SELECT 
-            utilisateurs.login AS author, ".
+            utilisateurs.login AS author, 
+            categories.name AS category, ".
             self::$tb_name.".user_id, ".
             self::$tb_name.".title, ".
-            self::$tb_name.".category, ".
+            self::$tb_name.".category_id, ".
             self::$tb_name.".content, ".
             self::$tb_name.".imagePath FROM ".self::$tb_name.
-            " INNER JOIN utilisateurs ON ".
-            self::$tb_name.".user_id = utilisateurs.id";
+            " INNER JOIN utilisateurs ON ".self::$tb_name.".user_id = utilisateurs.id".
+            " INNER JOIN categories ON ".self::$tb_name.".category_id = categories.id";
 
             $req = $bdd->prepare($sql);
             $req->execute();
