@@ -58,6 +58,11 @@
         public static function display_all_articles($order) {
             $articles = self::get_all_articles($order);
             if($articles) :?>
+            <section class="content">
+                <div class="box-lien">
+                    <a href="?order=ASC">ASC</a>
+                    <a href="?order=DESC">DESC</a>
+                </div>
                 <?php for($i=0; isset($articles[$i]); $i++) :?>
                     <article class="article">
                         <div class="info flex-r">
@@ -71,10 +76,11 @@
                         </div>
                     </article>
                 <?php endfor ;?>
-            <?php else :?>
-                <h3>Accune article publier</h3>
-                <p>voulez-vous publier un article <a href="new_article.php">new_article</a></p>
-            <?php endif ;?>
+                <?php else :?>
+                    <h3>Accune article publier</h3>
+                    <p>voulez-vous publier un article <a href="new_article.php">new_article</a></p>
+                <?php endif ;?>
+            </section>
     <?php }
         
     }

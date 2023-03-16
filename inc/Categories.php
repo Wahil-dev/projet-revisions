@@ -49,7 +49,7 @@
 
         public static function display_categories() {
             $categories = self::get_all_categories();?>
-            <select name="categories" id="categories">
+            <select name="categories" id="categories" class="inp">
                 <option value="" default>chose category</option>
                 <?php if($categories) :?>
                     <?php for($i=0; isset($categories[$i]); $i++) :?>

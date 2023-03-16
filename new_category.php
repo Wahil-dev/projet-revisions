@@ -6,7 +6,7 @@
     $user->redirect_if_not_logged();
     require_once("inc/head.php");
 ?>
-    <div class="box-form categories-box">
+    <div class="box-form content-box">
         <form class="form" action="inc/b_new_category.php" method="post">
             <label for="name">name</label>
             <input type="text" name="name" id="name" class="inp">

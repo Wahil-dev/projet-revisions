@@ -7,25 +7,23 @@
     $user->redirect_if_not_logged();
     require_once("inc/head.php");
 ?>
+    <div class="box-form content-box">
+        <form class="form" action="inc/b_new_article.php" method="post">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" class="inp">
+            <span class="err-msg"><?php echo isset($_SESSION["titleErr"]) ? $_SESSION["titleErr"] : ""?></span>
 
-    <form class="form" action="inc/b_new_article.php" method="post">
-        <label for="title">Title</label>
-        <input type="text" name="title" id="title" class="inp">
-        <span class="err-msg"><?php echo isset($_SESSION["titleErr"]) ? $_SESSION["titleErr"] : ""?></span>
+            <?php Categories::display_categories()?>
 
-        <?php Categories::display_categories()?>
+            <span class="err-msg"><?php echo isset($_SESSION["categoryErr"]) ? $_SESSION["categoryErr"] : ""?></span>
 
-        <span class="err-msg"><?php echo isset($_SESSION["categoryErr"]) ? $_SESSION["categoryErr"] : ""?></span>
+            <textarea name="content" id="content" cols="30" rows="10" class="inp" placeholder="Content ..."></textarea>
+            <span class="err-msg"><?php echo isset($_SESSION["contentErr"]) ? $_SESSION["contentErr"] : ""?></span>
 
-        <label for="content">Content</label>
-        <textarea name="content" id="content" cols="30" rows="10"></textarea>
-        <span class="err-msg"><?php echo isset($_SESSION["contentErr"]) ? $_SESSION["contentErr"] : ""?></span>
-
-        <input type="submit" value="Post" class="btn-custom">
-        <span class="err-msg"><?php echo isset($_SESSION["postErr"]) ? $_SESSION["postErr"] : ""?></span>
-    </form>
-
-
+            <input type="submit" value="Post" class="btn-custom">
+            <span class="err-msg"><?php echo isset($_SESSION["postErr"]) ? $_SESSION["postErr"] : ""?></span>
+        </form>
+    </div>
 <?php
     require_once("inc/footer.php");
     Authentication::delete_error_session();
