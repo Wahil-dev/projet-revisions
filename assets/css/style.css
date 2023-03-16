@@ -15,12 +15,13 @@
 }
 
 .btn-custom {
-    padding: 10px 15px;
+    padding: 10px 25px;
     background-color: blueviolet;
     outline: none;
     border: none;
     cursor: pointer;
     color: white;
+    margin-top: 5px;
 }
 .btn-custom:hover {
     background-color: rgb(159, 96, 218);
@@ -167,5 +168,13 @@ header a {
 }
 
 
+
+/*______________________________________________________*/
+
+/* ------------------- categories-box ------------------ */
+.categories-box {
+    width: 100% !important;
+    min-height: 100px !important;
+}
 
 /*______________________________________________________*/

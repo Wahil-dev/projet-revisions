@@ -18,18 +18,17 @@
 
         if(!empty($name)) {
             if(Categories::is_exist($name)) {
-                $nameErr = "category exist déja !";
+                $_SESSION["nameErr"] = "category exist déja !";
                 header("location: ../new_category.php");
                 exit();
             }
             $new_category = new Categories($name);
             if($new_category) {
-                header("location: ../articles.php");
+                header("location: ../article.php");
                 exit();
             }
         } else {
             $_SESSION["nameErr"] = $nameErr;
-
             header("location: ../new_category.php");
             exit();
         }
