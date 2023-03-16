@@ -8,7 +8,8 @@
 
 @media screen and (max-width:992px) {
     .container {
-        width: 768px;
+        max-width: 768px;
+        width: 100%;
     }
 }
 
@@ -16,7 +17,8 @@
 
 @media screen and (max-width:768px) {
     .container {
-        width: 576px;
+        max-width: 576px;
+        width: 100%;
     }
 }
 
