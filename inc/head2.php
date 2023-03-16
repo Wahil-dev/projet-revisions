@@ -7,6 +7,12 @@
         <title>connexion</title>
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/mQuery.css">
+
+        <style>
+            .container {
+                min-height: 100vh;
+            }
+        </style>
     </head>
 <body>
-    <div class="container">
+    <div class="container flex-c">

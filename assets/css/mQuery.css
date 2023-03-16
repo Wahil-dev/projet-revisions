@@ -16,8 +16,23 @@
 
 @media screen and (max-width:768px) {
     .container {
+        width: 576px;
+    }
+}
+
+
+
+@media screen and (max-width:576px) {
+    .container {
         width: 100%;
     }
+
+    
+    .box-form {
+        width: 100%;
+    }
+
+    
 }
 
 
