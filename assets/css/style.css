@@ -25,6 +25,13 @@ a {
     align-items: center;
 }
 
+.flex-c {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
 header {
     background-color: #444;
     height: 70px;

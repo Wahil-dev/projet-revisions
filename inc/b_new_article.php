@@ -43,7 +43,7 @@
             $_SESSION["categoryErr"] = $categoryErr;
             $_SESSION["contentErr"] = $contentErr;
 
-            header("location: ../new_article.php");
+            header("location: ../article.php");
             exit();
         }
     }
