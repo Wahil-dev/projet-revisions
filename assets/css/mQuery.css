@@ -27,6 +27,21 @@
         width: 100%;
     }
 
+    .content .profile {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+
+    .content .profile :is(.img-box, .info) {
+        width: 100%;
+        height: 250px;
+    }
+    
+
+    .content .profile .info {
+        height: 150px;
+    }
     
     .box-form {
         width: 100%;

@@ -93,11 +93,6 @@ header a {
     color: white;
 }
 
-.info {
-    background-color: aqua;
-    padding: 10px;
-}
-
 .title {
     padding: 10px 0;
 }
@@ -121,6 +116,56 @@ header a {
 .box-form .form .inp {
 
 }
+
+
+/*______________________________________________________*/
+
+
+
+
+
+
+/* ------------------------------- Profile ------------------------------- */
+.content {
+    width: 100%;
+    gap: 35px;
+    padding: 10px 0;
+}
+
+.content .profile {
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.content .profile .img-box {
+    width: 48%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.content .profile .img-box img {
+    width: 100%;
+}
+
+.content .profile .info {
+    width: 49%;
+}
+
+.content .profile .info p {
+    padding-bottom: 15px;
+}
+
+
+.content .box-form {
+    width: 100% !important;
+    min-height: 200px !important;
+    background-color: none !important;
+}
+
+.content .box-form .form {
+    background-color: none !important;
+}
+
 
 
 /*______________________________________________________*/

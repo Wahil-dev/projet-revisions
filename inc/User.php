@@ -167,11 +167,11 @@
 
         public function display_user_profile() {
             ?>
-            <section class="content">
-                <article class="profile flex-c">
-                    <h3>Profile</h3>
+            <section class="content flex-c">
+                <h2>Profile</h2>
+                <article class="profile flex-r">
                     <div class="img-box">
-                        <img src="" alt="profile-image">
+                        <img src="assets/img/portfolio-img.jpg" alt="profile-image">
                     </div>
                     <div class="info">
                         <p>Login : <?= $this->get_login()?></p>
@@ -180,20 +180,22 @@
                         <p>Password : <?= $this->get_password()?></p>
                     </div>
                 </article>
-                <form class="form" action="inc/edit_profile.php" method="post">
-                    <input type="text" name="login" id="login" class="inp" placeholder="login">
-                    <span class="err-msg"><?php echo isset($_SESSION["loginErr"]) ? $_SESSION["loginErr"] : ""?></span>
+                <div class="box-form">
+                    <form class="form" action="inc/edit_profile.php" method="post">
+                        <input type="text" name="login" id="login" class="inp" placeholder="login">
+                        <span class="err-msg"><?php echo isset($_SESSION["loginErr"]) ? $_SESSION["loginErr"] : ""?></span>
 
-                    <input type="email" name="email" id="email" class="inp" placeholder="email">
-                    <span class="err-msg"><?php echo isset($_SESSION["emailErr"]) ? $_SESSION["emailErr"] : ""?></span>
+                        <input type="email" name="email" id="email" class="inp" placeholder="email">
+                        <span class="err-msg"><?php echo isset($_SESSION["emailErr"]) ? $_SESSION["emailErr"] : ""?></span>
 
-                    <input type="password" name="password" id="password" class="inp" placeholder="password">
-                    <span class="err-msg"><?php echo isset($_SESSION["passwordErr"]) ? $_SESSION["passwordErr"] : ""?></span>
+                        <input type="password" name="password" id="password" class="inp" placeholder="password">
+                        <span class="err-msg"><?php echo isset($_SESSION["passwordErr"]) ? $_SESSION["passwordErr"] : ""?></span>
 
 
-                    <input type="submit" value="Update" class="btn-custom">
-                    <span class="err-msg"><?php echo isset($_SESSION["identifierErr"]) ? $_SESSION["identifierErr"] : ""?></span>
-                </form>
+                        <input type="submit" value="Update" class="btn-custom">
+                        <span class="err-msg"><?php echo isset($_SESSION["identifierErr"]) ? $_SESSION["identifierErr"] : ""?></span>
+                    </form>
+                </div>
             </section>
     <?php }
     }
