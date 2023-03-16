@@ -64,14 +64,17 @@
                     <a href="?order=DESC">DESC</a>
                 </div>
                 <?php for($i=0; isset($articles[$i]); $i++) :?>
-                    <article class="article">
+                    <article class="article flex-c">
+                        <div class="box-img">
+                            <img src="assets/img/<?=$articles[$i]->imagePath?>" alt="<?= $articles[$i]->imagePath?>">
+                        </div>
                         <div class="info flex-r">
                             <p>title : <span><?= $articles[$i]->title?></span></p>
                             <p>category : <span><?= $articles[$i]->category?></span></p>
                             <p>author : <span><?= $articles[$i]->author?></span></p>
                             <p>postDate : <span><?= $articles[$i]->postDate?></span></p>
                         </div>
-                        <div class="content">
+                        <div class="text">
                             <?= $articles[$i]->content?>
                         </div>
                     </article>
