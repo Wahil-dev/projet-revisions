@@ -32,7 +32,7 @@
         
 
         //_______________________________________ Static Method
-        public static function get_all_articles() {
+        public static function get_all_articles($order = "ASC") {
             $bdd = Parent::get_conn();
 
             $sql = "SELECT 
@@ -42,9 +42,11 @@
             self::$tb_name.".title, ".
             self::$tb_name.".category_id, ".
             self::$tb_name.".content, ".
+            self::$tb_name.".postDate, ".
             self::$tb_name.".imagePath FROM ".self::$tb_name.
             " INNER JOIN utilisateurs ON ".self::$tb_name.".user_id = utilisateurs.id".
-            " INNER JOIN categories ON ".self::$tb_name.".category_id = categories.id";
+            " INNER JOIN categories ON ".self::$tb_name.".category_id = categories.id
+            ORDER BY ".self::$tb_name.".postDate ".$order;
 
             $req = $bdd->prepare($sql);
             $req->execute();
@@ -53,8 +55,8 @@
             return $res;
         }
 
-        public static function display_all_articles() {
-            $articles = self::get_all_articles();
+        public static function display_all_articles($order) {
+            $articles = self::get_all_articles($order);
             if($articles) :?>
                 <?php for($i=0; isset($articles[$i]); $i++) :?>
                     <article class="article">
@@ -62,6 +64,7 @@
                             <p>title : <span><?= $articles[$i]->title?></span></p>
                             <p>category : <span><?= $articles[$i]->category?></span></p>
                             <p>author : <span><?= $articles[$i]->author?></span></p>
+                            <p>postDate : <span><?= $articles[$i]->postDate?></span></p>
                         </div>
                         <div class="content">
                             <?= $articles[$i]->content?>
@@ -72,7 +75,6 @@
                 <h3>Accune article publier</h3>
                 <p>voulez-vous publier un article <a href="new_article.php">new_article</a></p>
             <?php endif ;?>
-        
     <?php }
         
     }
