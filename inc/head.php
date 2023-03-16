@@ -10,6 +10,11 @@
     <title>index</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/mQuery.css">
+    <style>
+		.container {
+			min-height: calc(100vh - 70px - 70px);
+		}
+	</style>
 </head>
 <body>
     <header class="flex-r">
