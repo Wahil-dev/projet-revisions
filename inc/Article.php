@@ -7,18 +7,18 @@
         private $title;
         private $category_id;
         private $content;
-        private $image;
+        private $postImage;
 
-        public function __construct($title, $content, $image, $category_id) {
+        public function __construct($title, $content, $postImage, $category_id) {
             $this->bdd = Parent::__construct();
             $this->title = $title;
             $this->content = $content;
-            $this->image = $image;
+            $this->postImage = $postImage;
             $this->category_id = $category_id;
 
-            $sql = "INSERT INTO ".$this->get_tbname()."(title, content, imagePath, user_id, category_id) VALUES(?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO ".$this->get_tbname()."(title, content, postImage, user_id, category_id) VALUES(?, ?, ?, ?, ?)";
             $req = $this->bdd->prepare($sql);
-            $req->execute([$this->title, $this->content, $this->image, $_SESSION["user_id"], $this->category_id]);
+            $req->execute([$this->title, $this->content, $this->postImage, $_SESSION["user_id"], $this->category_id]);
             
             return true;
         }
@@ -43,7 +43,7 @@
             self::$tb_name.".category_id, ".
             self::$tb_name.".content, ".
             self::$tb_name.".postDate, ".
-            self::$tb_name.".imagePath FROM ".self::$tb_name.
+            self::$tb_name.".postImage FROM ".self::$tb_name.
             " INNER JOIN utilisateurs ON ".self::$tb_name.".user_id = utilisateurs.id".
             " INNER JOIN categories ON ".self::$tb_name.".category_id = categories.id
             ORDER BY ".self::$tb_name.".postDate ".$order;
@@ -66,7 +66,7 @@
                 <?php for($i=0; isset($articles[$i]); $i++) :?>
                     <article class="article flex-c">
                         <div class="box-img">
-                            <img src="assets/img/<?=$articles[$i]->imagePath?>" alt="<?= $articles[$i]->imagePath?>">
+                            <img src="assets/img/articles/<?=$articles[$i]->postImage?>" alt="<?= $articles[$i]->postImage?>">
                         </div>
                         <div class="info flex-r">
                             <p>title : <span><?= $articles[$i]->title?></span></p>
@@ -81,9 +81,8 @@
                 <?php endfor ;?>
                 <?php else :?>
                     <h3>Accune article publier</h3>
-                    <p>voulez-vous publier un article <a href="new_article.php">new_article</a></p>
+                    <p>voulez-vous publier un article <a href="article.php">new_article</a></p>
                 <?php endif ;?>
             </section>
     <?php }
-        
     }
