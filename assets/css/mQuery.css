@@ -29,6 +29,11 @@
         width: 100%;
     }
 
+        
+    header .menu a {
+        font-size: .8rem;
+    }
+
     .content .profile {
         flex-direction: column;
         gap: 15px;

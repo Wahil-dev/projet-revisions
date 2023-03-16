@@ -230,3 +230,28 @@ header a {
 
 
 
+/* ---------------------- FOOTER ---------------------- */
+.footer {
+    background-color: #444;
+    width: 100%;
+    height: 70px;
+}
+
+.footer .content {
+    width: 200px;
+    margin: auto;
+}
+
+.footer .content a {
+    color: white;
+}
+
+.footer .content a:hover {
+    color: rgb(186, 169, 169);
+}
+
+
+/*______________________________________________________*/
+
+
+

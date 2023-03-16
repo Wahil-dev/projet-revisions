@@ -87,7 +87,7 @@
                             <p>
                                 <?= substr($articles[$i]->content, 0, 250)?> ...
                             </p>
-                            <a class="path_lien btn-custom" href="page-article.php?article_id=<?= $articles[$i]->id?>" target="_blank">Lire plus</a>
+                            <a class="path_lien btn-custom" href="page-article.php?article_id=<?= $articles[$i]->id?>">Lire plus</a>
                         </div>
                     </article>
                 <?php endfor ;?>
